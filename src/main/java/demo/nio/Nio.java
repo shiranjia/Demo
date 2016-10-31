@@ -67,21 +67,8 @@ public class Nio {
                                 ServerSocketChannel channel = (ServerSocketChannel) key.channel();
                                 SocketChannel socketChannel = channel.accept();
                                 socketChannel.configureBlocking(false);
-                                ByteBuffer bf = ByteBuffer.allocate(1024);
-                                String a = null;
-                                while (socketChannel.read(bf) > 0){
-                                    bf.flip();byte[] s = bf.array();
-                                    a = new String(s);
-                                    log(a);
-                                    bf.clear();
-                                }
-                                if(a != null && a.length() > 0){
-                                    socketChannel.register(selector,SelectionKey.OP_CONNECT | SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-                                }else {
-                                    socketChannel.close();
-                                }
-
-                            }else if(key.isConnectable()){
+                                socketChannel.register(selector,SelectionKey.OP_READ);
+                            }/*else if(key.isConnectable()){
                                 log("a Connectable channel");
                                 SocketChannel socketChannel = (SocketChannel) key.channel();
                                 socketChannel.configureBlocking(false);
@@ -92,7 +79,7 @@ public class Nio {
                                 //连接成功后，注册接收服务器消息的事件
                                 //socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ | SelectionKey.OP_WRITE);
                                 log("客户端连接成功");
-                            }else  if(key.isReadable()){
+                            }*/else  if(key.isReadable()){
                                 log("a Readable channel");
                                 SocketChannel socketChannel = (SocketChannel) key.channel();
                                 socketChannel.configureBlocking(false);
@@ -103,7 +90,7 @@ public class Nio {
                                     log(new String(s));
                                     bf.clear();
                                 }
-                                socketChannel.register(selector,SelectionKey.OP_CONNECT | SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+                                socketChannel.register(selector,SelectionKey.OP_WRITE);
                             }else if(key.isWritable()){
                                 log("a Writable channel");
                                 SocketChannel socketChannel = (SocketChannel) key.channel();
@@ -132,9 +119,9 @@ public class Nio {
         try {
             AsynchronousChannelGroup group = AsynchronousChannelGroup.withCachedThreadPool(
                     Executors.newCachedThreadPool(),10);
-            AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel.open(group);
-            server.setOption(StandardSocketOptions.SO_REUSEADDR,true);
-            server.setOption(StandardSocketOptions.SO_RCVBUF,16 * 1024);
+            AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel.open();
+            //server.setOption(StandardSocketOptions.SO_REUSEADDR,true);
+            //server.setOption(StandardSocketOptions.SO_RCVBUF,16 * 1024);
 
             server.bind(new InetSocketAddress("localhost",8080));
             log("server start");
@@ -158,12 +145,13 @@ public class Nio {
                         //bf.clear();
                         //bf.put("asaef".getBytes());
                         result.write(bf);
-                        //bf.flip();
+                        bf.flip();
                     }catch (Exception e){
                         e.printStackTrace();
                     }finally {
                         try {
                             result.close();
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

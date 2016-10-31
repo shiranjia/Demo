@@ -4,12 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
-import java.net.StandardSocketOptions;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
+import static demo.nio.Commons.*;
 
 /**
  * Created by jiashiran on 2016/10/28.
@@ -119,7 +119,7 @@ public class Nio {
         try {
             AsynchronousChannelGroup group = AsynchronousChannelGroup.withCachedThreadPool(
                     Executors.newCachedThreadPool(),10);
-            AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel.open();
+            final AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel.open();
             //server.setOption(StandardSocketOptions.SO_REUSEADDR,true);
             //server.setOption(StandardSocketOptions.SO_RCVBUF,16 * 1024);
 
@@ -203,11 +203,6 @@ public class Nio {
         log(new String(bf.array()));
     }
 
-    public static void log(String ...args){
-        for (String a : args){
-            System.out.print(a);
-        }
-        System.out.println();
-    }
+
 
 }

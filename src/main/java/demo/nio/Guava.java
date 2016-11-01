@@ -4,9 +4,17 @@ import com.google.common.base.*;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
+import com.google.common.hash.*;
+import com.google.common.primitives.Bytes;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.SignedBytes;
+import com.google.common.reflect.Reflection;
+import com.google.common.reflect.TypeToken;
 import com.google.common.util.concurrent.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -18,7 +26,7 @@ import static com.google.common.base.Preconditions.*;
 /**
  * Created by jiashiran on 2016/10/31.
  */
-public class Guava {
+public class Guava implements GuaveInterface{
     private float ran = 0;
 
     public Guava(){}
@@ -31,7 +39,55 @@ public class Guava {
         //g.commonObject();
         //g.ordering();
         //g.immu();
-        g.string();
+        //g.string();
+        //g.range();
+        //g.hash();
+        g.refliect();
+    }
+
+    public void refliect(){
+        List<String> list = Arrays.asList();
+        TypeToken t = TypeToken.of(list.getClass());
+        log(t.getType());
+
+        GuaveInterface o = Reflection.newProxy(GuaveInterface.class, new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                log("before");
+                Object o = method.invoke(new Guava(),args);
+                log("after");
+                return o;
+            }
+        });
+        o.toStr("asdasd");
+        Reflection.initialize(Guava.class);
+    }
+
+    private void hash(){
+        HashFunction hs = Hashing.crc32c();
+        Hasher hasher = hs.newHasher();
+        HashCode hashCode = hasher.putBoolean(false).putByte(Byte.valueOf("23")).putDouble(3.14).putInt(43).hash();
+        log(hashCode.toString());
+    }
+
+    private void range(){//范围
+        Range<Integer> r = Range.closed(1,99);
+        log(r.contains(100));
+        r = Range.openClosed(1,99);
+        log(r.contains(99));
+        r = Range.atLeast(30);
+        log(r.contains(29));
+        log(r.isConnected(Range.open(31,32)));//测试是否有区间同时包含于这两个区间
+        log(r.intersection(Range.closedOpen(34,35)));//交集
+        log(r.span(Range.open(22,33)));//跨区间
+    }
+
+    private void type(){//原生类型加强
+        List<Byte> list = Bytes.asList(Byte.parseByte("1"),Byte.parseByte("2"),Byte.parseByte("3"));
+        byte[] b = new byte[]{};
+        Bytes.contains(b , Byte.parseByte("3"));
+        List<Integer> l =  Ints.asList(1,2,3,4);
+
     }
 
     private void string(){
@@ -128,5 +184,10 @@ public class Guava {
         log(o.isPresent());
         log(o.or(2));
         log(o.get());
+    }
+
+    @Override
+    public void toStr(String a) {
+        log("toStr:",a);
     }
 }

@@ -29,7 +29,7 @@ public class Nio {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        //ÒòÎªAIO²»»á×èÈûµ÷ÓÃ½ø³Ì£¬Òò´Ë±ØĞëÔÚÖ÷½ø³Ì×èÈû£¬²ÅÄÜ±£³Ö½ø³Ì´æ»î¡£
+        //å› ä¸ºAIOä¸ä¼šé˜»å¡è°ƒç”¨è¿›ç¨‹ï¼Œå› æ­¤å¿…é¡»åœ¨ä¸»è¿›ç¨‹é˜»å¡ï¼Œæ‰èƒ½ä¿æŒè¿›ç¨‹å­˜æ´»ã€‚
         try {
             Thread.sleep(Integer.MAX_VALUE);
         } catch (InterruptedException e) {
@@ -60,7 +60,7 @@ public class Nio {
                         Iterator<SelectionKey> selectionKeys = selector.selectedKeys().iterator();
                         while (selectionKeys.hasNext()){
                             SelectionKey key = selectionKeys.next();
-                            selectionKeys.remove();//É¾³ıselectµÃµ½µÄselectionKey
+                            selectionKeys.remove();//åˆ é™¤selectå¾—åˆ°çš„selectionKey
 
                             if(key.isAcceptable()){
                                 log("a Acceptable channel");
@@ -72,13 +72,13 @@ public class Nio {
                                 log("a Connectable channel");
                                 SocketChannel socketChannel = (SocketChannel) key.channel();
                                 socketChannel.configureBlocking(false);
-                                //Èç¹ûÕıÔÚÁ¬½Ó£¬ÔòÍê³ÉÁ¬½Ó
+                                //å¦‚æœæ­£åœ¨è¿æ¥ï¼Œåˆ™å®Œæˆè¿æ¥
                                 if(socketChannel.isConnectionPending()){
                                     socketChannel.finishConnect();
                                 }
-                                //Á¬½Ó³É¹¦ºó£¬×¢²á½ÓÊÕ·şÎñÆ÷ÏûÏ¢µÄÊÂ¼ş
+                                //è¿æ¥æˆåŠŸåï¼Œæ³¨å†Œæ¥æ”¶æœåŠ¡å™¨æ¶ˆæ¯çš„äº‹ä»¶
                                 //socketChannel.register(selector, SelectionKey.OP_CONNECT | SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-                                log("¿Í»§¶ËÁ¬½Ó³É¹¦");
+                                log("å®¢æˆ·ç«¯è¿æ¥æˆåŠŸ");
                             }*/else  if(key.isReadable()){
                                 log("a Readable channel");
                                 SocketChannel socketChannel = (SocketChannel) key.channel();

@@ -70,10 +70,10 @@ public class Guava {
     }
 
     private void immu(){
-        ImmutableList<String> s = ImmutableList.of("a","b","c");//²»¿É±ä¼¯ºÏ
+        ImmutableList<String> s = ImmutableList.of("a","b","c");//ä¸å¯å˜é›†åˆ
         ImmutableMap<String,String> map = ImmutableMap.of("a","234","v","d");
         Multimap<String,String> map1 = HashMultimap.create();
-        map1.put("a","123");map1.put("a","asdfe");//Ò»key¶àvalue
+        map1.put("a","123");map1.put("a","asdfe");//ä¸€keyå¤švalue
         map1.put("b","asdfaef");
     }
 
@@ -93,7 +93,7 @@ public class Guava {
         }
     }
 
-    private void ordering(){//ÅÅĞò
+    private void ordering(){//æ’åº
         Ordering<Guava> o = Ordering.natural().nullsFirst().onResultOf(new Function<Guava, Comparable>() {
             @Override
             public Comparable apply(Guava input) {
@@ -106,14 +106,14 @@ public class Guava {
         log(g);
     }
 
-    private void commonObject(){//object ·½·¨
+    private void commonObject(){//object æ–¹æ³•
         log(Objects.equal("a",null)) ;
         log(Objects.hashCode("a","b",123,'c',2.56));
         log(MoreObjects.toStringHelper("a").add("asds",123));
         log(ComparisonChain.start().compare(155,42).compare(5,4).compare(6,1).result());
     }
 
-    private void checkArguments(){//Ìõ¼ş¼ì²é
+    private void checkArguments(){//æ¡ä»¶æ£€æŸ¥
         checkArgument(1==0);
         checkNotNull(null);
         checkState(1==1);
@@ -122,7 +122,7 @@ public class Guava {
         checkPositionIndexes(2,4,5);
     }
 
-    private void optional(){//ÅĞ¶Ïnull
+    private void optional(){//åˆ¤æ–­null
         Optional<Integer> o = Optional.of(new Integer(1));
         o = Optional.fromNullable(null);
         log(o.isPresent());

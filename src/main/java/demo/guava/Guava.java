@@ -1,4 +1,4 @@
-package demo.nio;
+package demo.guava;
 
 import com.google.common.base.*;
 import com.google.common.base.Objects;
@@ -7,11 +7,9 @@ import com.google.common.collect.*;
 import com.google.common.hash.*;
 import com.google.common.primitives.Bytes;
 import com.google.common.primitives.Ints;
-import com.google.common.primitives.SignedBytes;
 import com.google.common.reflect.Reflection;
 import com.google.common.reflect.TypeToken;
 import com.google.common.util.concurrent.*;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -26,7 +24,7 @@ import static com.google.common.base.Preconditions.*;
 /**
  * Created by jiashiran on 2016/10/31.
  */
-public class Guava implements GuaveInterface{
+public class Guava implements GuaveInterface {
     private float ran = 0;
 
     public Guava(){}

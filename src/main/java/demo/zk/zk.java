@@ -1,4 +1,4 @@
-package demo;
+package demo.zk;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

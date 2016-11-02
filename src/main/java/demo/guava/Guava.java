@@ -18,8 +18,8 @@ import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
-import static demo.nio.Commons.*;
 import static com.google.common.base.Preconditions.*;
+import static demo.Commons.log;
 
 /**
  * Created by jiashiran on 2016/10/31.

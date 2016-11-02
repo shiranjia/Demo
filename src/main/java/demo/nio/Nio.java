@@ -9,7 +9,8 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
-import static demo.nio.Commons.*;
+
+import static demo.Commons.log;
 
 /**
  * Created by jiashiran on 2016/10/28.

@@ -4,9 +4,11 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.retry.ExponentialBackoffRetry;
-import org.apache.curator.utils.EnsurePath;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static demo.Commons.log;
 
@@ -24,12 +26,13 @@ public class zk {
     static String path = "/ppp";
 
     public static void main(String[] args) {
-       zk z = new zk();
+        final zk z = new zk();
         z.cgudl();
+        Lock lock = new ReentrantLock();
+        lock.lock();
+        lock.newCondition();
 
     }
-
-
 
     private void cgudl(){
         client.start();

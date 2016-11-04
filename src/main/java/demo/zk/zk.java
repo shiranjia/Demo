@@ -27,11 +27,20 @@ public class zk {
 
     public static void main(String[] args) {
         final zk z = new zk();
-        z.cgudl();
-        Lock lock = new ReentrantLock();
-        lock.lock();
-        lock.newCondition();
 
+        //z.cgudl();
+        z.checkExits();
+
+    }
+
+    private void checkExits(){
+        client.start();
+        try {
+            Stat stat = client.checkExists().forPath("/afs");
+            log(stat);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void cgudl(){

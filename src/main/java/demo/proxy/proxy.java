@@ -8,7 +8,7 @@ import static demo.Commons.log;
 /**
  * /**
  * 基于javassist实现的动态代理类，即在运行时在内存中动态生成要代理的接口的实现，并在接口的方法实现中反射 
- * com.cuishen.myAop.InterceptorHandler（拦截器接口）的invoke方法，所以在使用本代理之前请先实现 
+ * demo.proxy.InterceptorHandler（拦截器接口）的invoke方法，所以在使用本代理之前请先实现 
  * 拦截器接口。本代理提供接近java.lang.reflect.Proxy的功能 
  * @version 1.0
  * @see java.lang.reflect.Proxy
@@ -23,8 +23,8 @@ public class proxy {
     private static int proxyClassIndex = 1;
 
     /**
-     * 暴露给用户的动态代理接口，返回某个接口的动态代理对象，注意本代理实现需和com.cuishen.myAop.InterceptorHandler拦截器配合 
-     * 使用，即用户要使用本动态代理，需先实现com.cuishen.myAop.InterceptorHandler拦截器接口 
+     * 暴露给用户的动态代理接口，返回某个接口的动态代理对象，注意本代理实现需和demo.proxy.InterceptorHandler拦截器配合 
+     * 使用，即用户要使用本动态代理，需先实现demo.proxy.InterceptorHandler拦截器接口 
      * <br> 
      * 使用方法如下: 
      * <br> 

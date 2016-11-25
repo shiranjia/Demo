@@ -32,7 +32,7 @@ public class Guava implements GuaveInterface {
 
     public static void main(String[] args) {
         Guava g = new Guava();
-        //g.optional();
+        g.optional();
         //g.checkArguments();
         //g.commonObject();
         //g.ordering();
@@ -40,7 +40,7 @@ public class Guava implements GuaveInterface {
         //g.string();
         //g.range();
         //g.hash();
-        g.refliect();
+        //g.refliect();
     }
 
     public void refliect(){
@@ -180,8 +180,9 @@ public class Guava implements GuaveInterface {
         Optional<Integer> o = Optional.of(new Integer(1));
         o = Optional.fromNullable(null);
         log(o.isPresent());
+        String s = new String(new byte[]{},Charsets.UTF_8);
         log(o.or(2));
-        log(o.get());
+        //log(o.get());
     }
 
     @Override

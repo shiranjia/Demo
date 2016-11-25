@@ -29,11 +29,26 @@ public class zk {
         final zk z = new zk();
 
         //z.cgudl();
-        z.checkExits();
+        //z.checkExits();
+        z.EPHEMERAL();
+        try {
+            Thread.sleep(Integer.MAX_VALUE);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void EPHEMERAL(){
+        try {
+            client.start();
+            client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath("/xConfig/test/cluster/127.0.0.1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkExits(){
+
         client.start();
         try {
             Stat stat = client.checkExists().forPath("/afs");

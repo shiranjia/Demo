@@ -16,10 +16,11 @@ public class thread {
     Condition condition2 = lock.newCondition();
     public static void main(String[] args) {
         thread t = new thread();
+        t.countDownLatch();
         //t.cyclicBarrier();
         //t.semaphore();
         //t.exchanger();
-        t.lock();
+        //t.lock();
     }
 
     //lock start
@@ -203,6 +204,11 @@ public class thread {
             @Override
             public void run() {
                 log("work1");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 latch.countDown();
             }
         }).start();

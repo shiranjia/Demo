@@ -60,6 +60,6 @@ public class InterceptorHandler{
        for (Object o : args){
            log("args :",o);
        }
-        return null;
+        return "test";
     }
 }

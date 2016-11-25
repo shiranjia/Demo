@@ -171,7 +171,6 @@ public class proxy {
         } else {
              methodDeclare.append("return (" + methodReturnType + ")returnObj;\n");
         }
-        methodDeclare.append("return (" + methodReturnType + ") \"123\";\n");
         methodDeclare.append("}");
         System.out.println(methodDeclare.toString());
         return methodDeclare.toString();
@@ -196,9 +195,6 @@ public class proxy {
 
     }
 
-    void a(){
-        this.getClass();
-    }
 }
 
 
